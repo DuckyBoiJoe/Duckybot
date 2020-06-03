@@ -19,8 +19,10 @@ bot.on('message', message => {
                 const filter = m => m.id !== bot.user.id
                 const coll = msg.createReactionCollector(filter, { max: 1 })
                 coll.on('collect', (reaction, user) => {
-                    user.send('You deleted your ticket.')
-                    c.delete()
+                    if user.id !== bot.user.id {
+                        user.send('You deleted your ticket.')
+                        c.delete()
+                    }
                 })
             })
 
